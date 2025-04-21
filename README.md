@@ -64,3 +64,67 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Docker環境での実行方法
+
+このプロジェクトはFrankenPHPを使用したDocker環境で実行できます。
+
+### 開発環境での実行
+
+開発環境では、以下のコマンドでプロジェクトを起動します：
+
+```bash
+docker-compose -f docker-compose.dev.yml up -d
+```
+
+以下のサービスが利用可能になります：
+
+- ウェブアプリケーション: http://localhost
+- PHPMyAdmin: http://localhost:8080
+
+開発環境では、ホストマシンのソースコードがコンテナにマウントされ、変更が即座に反映されます。
+また、XDebugも有効になっているため、VSCodeなどのIDEでデバッグが可能です。
+
+### 本番環境でのビルドと実行
+
+本番環境用にビルドする場合は以下のコマンドを実行します：
+
+```bash
+docker-compose build
+docker-compose up -d
+```
+
+アプリケーションは http://localhost で利用可能になります。
+
+### 環境変数の設定
+
+`.env`ファイルまたは環境変数を使って、以下の設定を変更できます：
+
+- `APP_ENV`: アプリケーション環境（local/production）
+- `APP_DEBUG`: デバッグモードの有効化（true/false）
+- `DB_CONNECTION`: DBタイプ（mysql/sqlite等）
+- `DB_HOST`: データベースホスト
+- `DB_DATABASE`: データベース名
+- `DB_USERNAME`: データベースユーザー名
+- `DB_PASSWORD`: データベースパスワード
+- `SERVER_NAME`: サーバー名（ホスト名）
+
+### コンテナ内でのコマンド実行
+
+Artisanコマンドなどをコンテナ内で実行する場合：
+
+```bash
+docker-compose exec app php artisan <コマンド>
+```
+
+例：マイグレーションの実行
+
+```bash
+docker-compose exec app php artisan migrate
+```
+
+npmコマンドの実行（開発環境の場合のみ）：
+
+```bash
+docker-compose -f docker-compose.dev.yml exec app npm run dev
+```

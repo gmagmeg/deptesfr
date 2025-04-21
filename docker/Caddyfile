@@ -1,0 +1,37 @@
+{
+    {$SERVER_NAME:localhost}
+    auto_https off
+}
+
+{$SERVER_NAME:localhost} {
+    root * /app/public
+    
+    # Enable compression
+    encode zstd gzip
+
+    # PHP configuration
+    php_server {
+        resolve_root_symlink
+    }
+
+    # Serve static files directly
+    @static {
+        file {
+            try_files {path} {path}/index.html
+        }
+        not path *.php
+    }
+    handle @static {
+        file_server
+    }
+
+    # Default Handler
+    handle {
+        php_fastcgi
+    }
+
+    # Enable logging
+    log {
+        format json
+    }
+} 
