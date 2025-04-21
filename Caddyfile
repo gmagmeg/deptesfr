@@ -1,5 +1,9 @@
-:80
+{
+    auto_https off
+}
 
-root * /app/public
-php_fastcgi laravel
-php_server
+:{$PORT} {
+    root * /app/public
+    php_fastcgi unix//var/run/php-fpm.sock
+    file_server
+}
