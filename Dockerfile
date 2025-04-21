@@ -28,6 +28,7 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # .envファイルのコピー
 COPY .env.example .env
+COPY Caddyfile /etc/caddy/Caddyfile
 
 # アプリケーションキーの生成
 RUN php artisan key:generate --force
@@ -41,4 +42,4 @@ RUN chown -R www-data:www-data \
 EXPOSE 80 443
 
 # コンテナ起動時のコマンド
-CMD ["frankenphp", "run",  "--config", "/app/Caddyfile"]
+CMD ["frankenphp", "run",  "--config", "/etc/caddy/Caddyfile"]
