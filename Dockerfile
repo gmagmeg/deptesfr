@@ -28,7 +28,7 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # .envファイルのコピー
 COPY .env.example .env
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY ./Caddyfile /etc/caddy/Caddyfile
 
 # アプリケーションキーの生成
 RUN php artisan key:generate --force
