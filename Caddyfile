@@ -2,7 +2,4 @@
 
 root * /app/public
 php_fastcgi laravel
-file_server
-servers {
-  protocols h1
-}
+php_server
