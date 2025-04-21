@@ -41,4 +41,4 @@ RUN chown -R www-data:www-data \
 EXPOSE 80 443
 
 # コンテナ起動時のコマンド
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"] 
+CMD ["frankenphp", "--config", "/app/Caddyfile"]
