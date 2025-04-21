@@ -26,6 +26,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 依存関係のインストール
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+RUN chmod -R 775 /app/storage /app/bootstrap/cache
+
 # .envファイルのコピー
 COPY .env.example .env
 COPY ./Caddyfile /etc/caddy/Caddyfile
@@ -38,8 +40,15 @@ RUN chown -R www-data:www-data \
     /app/storage \
     /app/bootstrap/cache
 
+# 環境設定
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+ENV LOG_CHANNEL=stderr
+
+ENV PORT=8080
+
 # ポートの公開
-EXPOSE 80 443
+EXPOSE ${PORT}
 
 # コンテナ起動時のコマンド
 CMD ["frankenphp", "run",  "--config", "/etc/caddy/Caddyfile"]
