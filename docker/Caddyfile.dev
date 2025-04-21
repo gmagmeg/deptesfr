@@ -1,10 +1,9 @@
 {
-    {$SERVER_NAME:localhost}
     auto_https off
     debug
 }
 
-{$SERVER_NAME:localhost} {
+localhost {
     root * /app/public
     
     # Enable compression
