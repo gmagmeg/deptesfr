@@ -16,7 +16,6 @@ services:
       - DB_DATABASE=${DB_DATABASE:-laravel}
       - DB_USERNAME=${DB_USERNAME:-root}
       - DB_PASSWORD=${DB_PASSWORD:-password}
-      - SERVER_NAME=${SERVER_NAME:-localhost}
     volumes:
       - ./storage:/app/storage
     depends_on:

@@ -37,15 +37,8 @@ RUN chown -R www-data:www-data \
     /app/storage \
     /app/bootstrap/cache
 
-# FrankenPHPの設定
-COPY docker/Caddyfile /etc/caddy/Caddyfile
-
-# 起動スクリプトの追加
-COPY docker/start.sh /start.sh
-RUN chmod +x /start.sh
-
 # ポートの公開
 EXPOSE 80 443
 
 # コンテナ起動時のコマンド
-CMD ["/start.sh"] 
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"] 

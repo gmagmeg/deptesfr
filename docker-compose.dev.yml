@@ -19,7 +19,6 @@ services:
       - DB_DATABASE=laravel
       - DB_USERNAME=root
       - DB_PASSWORD=password
-      - SERVER_NAME=localhost
     volumes:
       - .:/app
       - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
