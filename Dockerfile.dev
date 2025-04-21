@@ -47,7 +47,7 @@ RUN chown -R www-data:www-data \
     /app/bootstrap/cache
 
 # ポートの公開
-EXPOSE 80 443 5173
+EXPOSE 80 443 2019
 
 # コンテナ起動時のコマンド
 CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"] 
