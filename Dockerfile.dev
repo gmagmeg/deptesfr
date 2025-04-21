@@ -34,6 +34,9 @@ COPY . .
 # 依存関係のインストール
 RUN composer install --no-interaction
 
+# .envファイルのコピー
+COPY .env.example .env
+
 # NPM依存関係のインストール
 RUN npm install
 
@@ -41,9 +44,6 @@ RUN npm install
 RUN chown -R www-data:www-data \
     /app/storage \
     /app/bootstrap/cache
-
-# .envファイルのコピー
-COPY .env.example .env
 
 # FrankenPHPの設定
 COPY docker/Caddyfile.dev /etc/caddy/Caddyfile

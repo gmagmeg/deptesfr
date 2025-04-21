@@ -26,6 +26,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 依存関係のインストール
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+# .envファイルのコピー
+COPY .env.example .env
+
 # アプリケーションキーの生成
 RUN php artisan key:generate --force
 
@@ -33,9 +36,6 @@ RUN php artisan key:generate --force
 RUN chown -R www-data:www-data \
     /app/storage \
     /app/bootstrap/cache
-
-# .envファイルのコピー
-COPY .env.example .env
 
 # FrankenPHPの設定
 COPY docker/Caddyfile /etc/caddy/Caddyfile
